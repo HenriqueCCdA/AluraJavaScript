@@ -20,10 +20,10 @@ async function pegaArquivo(caminhoDoArquivo){
     const encoding = 'utf-8'
     try{
         const texto = await fs.promises.readFile(caminhoDoArquivo, encoding)
-        console.log(extraiLinks(texto))
+        return extraiLinks(texto)
     } catch(erro){
         trataErro(erro)
     }
 }
 
-pegaArquivo('./arquivos/texto1.md')
+module.exports = pegaArquivo
