@@ -37,13 +37,13 @@ for(var i = 0; i < pacientes.length; i++){
     }
 
     if( pesoEhValido && alturaEhValido){
-        let imc = peso / (altura * altura);
-        tdImc.textContent = imc.toFixed(2);
+        let imc = calculaImc(peso, altura);
+        tdImc.textContent = imc;
     }
 }
 
-let botaoAdicionar = document.querySelector('#adicionar-paciente')
+function calculaImc(peso, altura){
+    let imc = peso / (altura * altura);
 
-botaoAdicionar.addEventListener("click", () => {
-    console.log("Oi, cliquei no bot")
-})
+    return imc.toFixed(2);
+}
