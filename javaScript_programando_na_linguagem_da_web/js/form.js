@@ -37,8 +37,7 @@ function exibeMensagemDeErro(erros){
         li.textContent = erro;
         ul.appendChild(li);
     });
-
-}
+};
 
 
 function obtemPacienteDoFormulario(form){
