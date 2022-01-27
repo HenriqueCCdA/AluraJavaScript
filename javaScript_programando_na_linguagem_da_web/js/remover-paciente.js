@@ -1,9 +1,12 @@
-var tabela = document.querySelector("table");
+let tabela = document.querySelector("table");
 
 tabela.addEventListener("dblclick", function(event){
-    let alvoEvento = event.target;
-    let paiDoAlvo = alvoEvento.parentNode;
-    paiDoAlvo.remove();
+    event.target.parentNode.classList.add("fadeOut")
+
+    setTimeout(function(){
+        event.target.parentNode.remove();
+    }, 500);
+
 });
 
 // lista_pacientes.forEach(function(paciente){
