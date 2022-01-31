@@ -35,6 +35,7 @@ function inicializaMarcadores(){
         let digitado = campo.val();
         let comparavel = frase.substr(0, digitado.length);
         if( digitado == comparavel){
+            console.log('Certo');
             campo.addClass("borda-verde");
             campo.removeClass("borda-vermelha");
         }else{
@@ -44,6 +45,7 @@ function inicializaMarcadores(){
 
     });
 }
+
 function inicializaCronometro(){
     let tempoRestante = $("#tempo-digitacao").text();
     campo.one("focus", function(){
@@ -52,13 +54,19 @@ function inicializaCronometro(){
                 tempoRestante--;
                 $("#tempo-digitacao").text(tempoRestante);
                 if(tempoRestante < 1){
-                    campo.attr("disabled", true)
                     clearInterval(cronametroId);
-                    campo.toggleClass("campo-desativado");
+                    finalizaJogo();
                 }
             }, 1000);
     });
 }
+
+function finalizaJogo(){
+    campo.attr("disabled", true);
+    campo.toggleClass("campo-desativado");
+    inserePlacar();
+}
+
 
 function reiniciaJogo(){
     campo.attr("disabled", false);
