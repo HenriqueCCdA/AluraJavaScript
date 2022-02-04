@@ -3,7 +3,7 @@ $("#botao-sync").click(sincronizaPlacar);
 
 function inserePlacar(){
     let corpoTabela = $(".placar").find("tbody");
-    let usuario = "Henrique";
+    let usuario = $("#usuarios").val();
     let numPalavras = $("#contador-palavras").text();
 
     let linha = novaLinha(usuario, numPalavras);
@@ -78,4 +78,15 @@ function sincronizaPlacar(){
     $.post("http://localhost:3000/placar", dados, function(){
         console.log("Salvou o placar no servidor");
     });
+}
+
+function atualizaPlacar(){
+    $.get("http://localhost:3000/placar", function(data){
+        $(data).each(function(){
+            let linha = novaLinha(this.usuario, this.ponto);
+            linha.find(".botao-remover").click(removeLinha);
+            $("tbody").append(linha)
+        });
+    });
+
 }
