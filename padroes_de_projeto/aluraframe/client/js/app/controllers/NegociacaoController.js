@@ -13,9 +13,10 @@ class NegociacaoController{
             new NegociacaoView($('#negociacoesView')),
             'adiciona', 'esvazia');
 
-        this._mensagem = new Bind(new Mensagem(),
-                                  new MensagemView($('#mensagemView')),
-                                  'texto');
+        this._mensagem = new Bind(
+            new Mensagem(),
+            new MensagemView($('#mensagemView')),
+            'texto');
 
     }
 
@@ -23,17 +24,37 @@ class NegociacaoController{
         event.preventDefault();
         this._listaNegociacoes.adiciona(this._criaNegociacao());
 
-        this._mensagem.texto = 'Negociação adicionada com sucesso'
-        this._mensagemView.update(this._mensagem);
+        this._mensagem.texto = 'Negociação adicionada co sucesso'
 
         this._limpaFormulario();
+    }
+
+    importaNegociacoes(){
+        let xhr = new XMLHttpRequest();
+
+        xhr.open('GET', 'negociacoes/semana');
+
+        /* configuracoes */
+        xhr.onreadystatechange = () => {
+            if(xhr.readyState == 4){
+                if(xhr.status == 200){
+                    JSON.parse(xhr.responseText)
+                        .map( objeto => new Negociacao(new Date(objeto.data), objeto.quantidade, objeto.valor))
+                        .forEach(Negociacao => this._listaNegociacoes.adiciona(Negociacao));
+                        this._mensagem.texto = 'Negociações importadas com sucesso.';
+                } else {
+                    console.log(xhr.responseText);
+                    this._mensagem.texto = 'Não foi possível obter as negociações da semana';
+                }
+            }
+        };
+        xhr.send();
     }
 
     apaga(envent){
         this._listaNegociacoes.esvazia();
 
         this._mensagem.texto = 'Negociacoes apagadas com sucesso';
-        this._mensagemView.update(this._mensagem);
 
     }
 

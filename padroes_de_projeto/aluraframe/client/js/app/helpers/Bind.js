@@ -6,7 +6,7 @@ class Bind {
 
         view.update(model);
 
-        return proxy
+        return proxy;
 
     }
 

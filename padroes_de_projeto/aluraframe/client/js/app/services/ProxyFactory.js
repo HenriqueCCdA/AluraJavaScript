@@ -6,7 +6,7 @@ class ProxyFactory{
             get(target, prop, receiver){
                 if(props.includes(prop) && ProxyFactory._ehFuncao(target[prop])){
                     return function(){
-                        console.log(`interceptando ${prop}`);
+                        console.log(`interceptando no get ${prop}`);
                         Reflect.apply(target[prop], target, arguments);
                         return acao(target);
                     }
@@ -15,9 +15,11 @@ class ProxyFactory{
             },
 
             set(target, prop, value, receiver){
-                 if(props.includes[prop]){
-                    console.log(`interceptando ${prop}`);
-                    target(prop) = value;
+                console.log("interceptando o set");
+
+                if(props.includes(prop)){
+                    console.log(`interceptando no set ${prop}`);
+                    target[prop] = value;
                     acao(target);
                 }
                 return Reflect.set(target, prop, value, receiver);
