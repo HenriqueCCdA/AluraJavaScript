@@ -30,25 +30,40 @@ class NegociacaoController{
     }
 
     importaNegociacoes(){
-        let xhr = new XMLHttpRequest();
+        let service = new NegociacaoService();
 
-        xhr.open('GET', 'negociacoes/semana');
+        service.obterNegociacoesDaSemana((erro, negociacoes) => {
 
-        /* configuracoes */
-        xhr.onreadystatechange = () => {
-            if(xhr.readyState == 4){
-                if(xhr.status == 200){
-                    JSON.parse(xhr.responseText)
-                        .map( objeto => new Negociacao(new Date(objeto.data), objeto.quantidade, objeto.valor))
-                        .forEach(Negociacao => this._listaNegociacoes.adiciona(Negociacao));
-                        this._mensagem.texto = 'Negociações importadas com sucesso.';
-                } else {
-                    console.log(xhr.responseText);
-                    this._mensagem.texto = 'Não foi possível obter as negociações da semana';
-                }
+            if(erro) {
+                this._mensagem.texto = erro;
+                return;
             }
-        };
-        xhr.send();
+            negociacoes.forEach(negociacao => this._listaNegociacoes.adiciona(negociacao));
+            this._mensagem.texto = 'Negociações importadas com sucesso';
+
+            service.obterNegociacoesDaSemanaAnterior((erro, negociacoes) => {
+
+                if(erro) {
+                    this._mensagem.texto = erro;
+                    return;
+                }
+                negociacoes.forEach(negociacao => this._listaNegociacoes.adiciona(negociacao));
+                this._mensagem.texto = 'Negociações importadas com sucesso';
+
+                service.obterNegociacoesDaSemanaRetrasada((erro, negociacoes) => {
+
+                    if(erro) {
+                        this._mensagem.texto = erro;
+                        return;
+                    }
+                    negociacoes.forEach(negociacao => this._listaNegociacoes.adiciona(negociacao));
+                    this._mensagem.texto = 'Negociações importadas com sucesso';
+                });
+
+            });
+
+        });
+
     }
 
     apaga(envent){
