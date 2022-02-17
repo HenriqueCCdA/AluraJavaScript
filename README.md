@@ -9,4 +9,4 @@
 7. [Curso de jQuery: Domine a biblioteca mais popular do mercado parte 1](https://github.com/HenriqueCCdA/AluraJavaScript/tree/main/jQuery_parte1) iniciado dia 28/01/2022 e finalizado dia 31/01/2022
 8. [Curso de jQuery: Domine a biblioteca mais popular do mercado parte 2](https://github.com/HenriqueCCdA/AluraJavaScript/tree/main/jQuery_parte1) iniciado dia 31/01/2022 e finalizado dia 05/02/2022
 9. [Curso de JavaScript: Conhecendo o Browser e padrões de projeto](https://github.com/HenriqueCCdA/AluraJavaScript/tree/main/padroes_de_projeto) iniciado dia 05/02/2022 e finalizado dia 10/02/2022
-10.[Curso de JavaScript: Aprofundando em MVC, padrão Proxy e Factory](https://github.com/HenriqueCCdA/AluraJavaScript/tree/main/padroes_de_projeto) iniciado dia 10/02/2022 e finalizado dia --/--/2022
+10.[Curso de JavaScript: Aprofundando em MVC, padrão Proxy e Factory](https://github.com/HenriqueCCdA/AluraJavaScript/tree/main/padroes_de_projeto) iniciado dia 10/02/2022 e finalizado dia 17/02/2022
