@@ -11,8 +11,8 @@
 
 		<div class="form-group">
 			<label for="data">Data</label>
-			<input type="date" id="data" class="form-control" required autofocus/>        
-		</div>    
+			<input type="date" id="data" class="form-control" required autofocus/>
+		</div>
 
 		<div class="form-group">
 			<label for="quantidade">Quantidade</label>
@@ -45,27 +45,18 @@
                 valor: inputValor.value
             };
 
-            let xhr = new XMLHttpRequest();
-            xhr.open("POST", "/negociacoes", true);
-            xhr.setRequestHeader("Content-type", "application/json");
-            
-            xhr.onreadystatechange = () => {
-                
-                if (xhr.readyState == 4) {
+            new HttpService()
+                .post('/negociacoes', negociacao)
+                .then(() => {
+                    inputData.value = '';
+                    inputQuantidade.value = 1;
+                    inputValor.value = 0.0;
+                    inputData.focus();
+                    alert('Negociação enviada com sucesso');
+                })
+                .catch(erro => alert('Não foi possível enviar a negociação: $(erro)`));
+  }
 
-                    if (xhr.status == 200) {
-                        inputData.value = '';
-                        inputQuantidade.value = 1;
-                        inputValor.value = 0.0;
-                        inputData.focus();
-                        alert('Negociação enviada com sucesso');
-                    } else {
-                        alert(`Não foi possível enviar a negociação: ${xhr.responseText}`);
-                    }
-                }
-            }
-            xhr.send(JSON.stringify(negociacao));
-                
     }
     </script>
 </body>
