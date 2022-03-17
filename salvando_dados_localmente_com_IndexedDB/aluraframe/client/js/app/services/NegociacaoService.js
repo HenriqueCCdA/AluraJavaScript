@@ -1,134 +1,187 @@
-class NegociacaoService {
+"use strict";
 
-    constructor() {
+System.register(["./HttpService", "./ConnectionFactory", "../dao/NegociacaoDao", "../models/Negociacao"], function (_export, _context) {
+    "use strict";
 
-        this._http = new HttpService();
+    var HttpService, ConnectionFactory, NegociacaoDao, Negociacao, _createClass, NegociacaoService;
+
+    function _classCallCheck(instance, Constructor) {
+        if (!(instance instanceof Constructor)) {
+            throw new TypeError("Cannot call a class as a function");
+        }
     }
 
-    obterNegociacoesDaSemana() {
+    return {
+        setters: [function (_HttpService) {
+            HttpService = _HttpService.HttpService;
+        }, function (_ConnectionFactory) {
+            ConnectionFactory = _ConnectionFactory.ConnectionFactory;
+        }, function (_daoNegociacaoDao) {
+            NegociacaoDao = _daoNegociacaoDao.NegociacaoDao;
+        }, function (_modelsNegociacao) {
+            Negociacao = _modelsNegociacao.Negociacao;
+        }],
+        execute: function () {
+            _createClass = function () {
+                function defineProperties(target, props) {
+                    for (var i = 0; i < props.length; i++) {
+                        var descriptor = props[i];
+                        descriptor.enumerable = descriptor.enumerable || false;
+                        descriptor.configurable = true;
+                        if ("value" in descriptor) descriptor.writable = true;
+                        Object.defineProperty(target, descriptor.key, descriptor);
+                    }
+                }
 
-       return new Promise((resolve, reject) => {
+                return function (Constructor, protoProps, staticProps) {
+                    if (protoProps) defineProperties(Constructor.prototype, protoProps);
+                    if (staticProps) defineProperties(Constructor, staticProps);
+                    return Constructor;
+                };
+            }();
 
-            this._http
-                .get('negociacoes/semana')
-                .then(negociacoes => {
-                    console.log(negociacoes);
-                    resolve(negociacoes.map(objeto => new Negociacao(new Date(objeto.data), objeto.quantidade, objeto.valor)));
-                })
-                .catch(erro => {
-                    console.log(erro);
-                    reject('Não foi possível obter as negociações da semana');
-                });
-       });
-    }
+            _export("NegociacaoService", NegociacaoService = function () {
+                function NegociacaoService() {
+                    _classCallCheck(this, NegociacaoService);
 
-    obterNegociacoesDaSemanaAnterior() {
+                    this._http = new HttpService();
+                }
 
-       return new Promise((resolve, reject) => {
+                _createClass(NegociacaoService, [{
+                    key: "obterNegociacoesDaSemana",
+                    value: function obterNegociacoesDaSemana() {
+                        var _this = this;
 
-            this._http
-                .get('negociacoes/anterior')
-                .then(negociacoes => {
-                    console.log(negociacoes);
-                    resolve(negociacoes.map(objeto => new Negociacao(new Date(objeto.data), objeto.quantidade, objeto.valor)));
-                })
-                .catch(erro => {
-                    console.log(erro);
-                    reject('Não foi possível obter as negociações da semana anterior');
-                });
-       });
+                        return new Promise(function (resolve, reject) {
 
+                            _this._http.get('negociacoes/semana').then(function (negociacoes) {
+                                console.log(negociacoes);
+                                resolve(negociacoes.map(function (objeto) {
+                                    return new Negociacao(new Date(objeto.data), objeto.quantidade, objeto.valor);
+                                }));
+                            }).catch(function (erro) {
+                                console.log(erro);
+                                reject('Não foi possível obter as negociações da semana');
+                            });
+                        });
+                    }
+                }, {
+                    key: "obterNegociacoesDaSemanaAnterior",
+                    value: function obterNegociacoesDaSemanaAnterior() {
+                        var _this2 = this;
 
-    }
+                        return new Promise(function (resolve, reject) {
 
-    obterNegociacoesDaSemanaRetrasada() {
+                            _this2._http.get('negociacoes/anterior').then(function (negociacoes) {
+                                console.log(negociacoes);
+                                resolve(negociacoes.map(function (objeto) {
+                                    return new Negociacao(new Date(objeto.data), objeto.quantidade, objeto.valor);
+                                }));
+                            }).catch(function (erro) {
+                                console.log(erro);
+                                reject('Não foi possível obter as negociações da semana anterior');
+                            });
+                        });
+                    }
+                }, {
+                    key: "obterNegociacoesDaSemanaRetrasada",
+                    value: function obterNegociacoesDaSemanaRetrasada() {
+                        var _this3 = this;
 
-       return new Promise((resolve, reject) => {
+                        return new Promise(function (resolve, reject) {
 
-            this._http
-                .get('negociacoes/retrasada')
-                .then(negociacoes => {
-                    console.log(negociacoes);
-                    resolve(negociacoes.map(objeto => new Negociacao(new Date(objeto.data), objeto.quantidade, objeto.valor)));
-                })
-                .catch(erro => {
-                    console.log(erro);
-                    reject('Não foi possível obter as negociações da semana retrasada');
-                });
-       });
-    }
+                            _this3._http.get('negociacoes/retrasada').then(function (negociacoes) {
+                                console.log(negociacoes);
+                                resolve(negociacoes.map(function (objeto) {
+                                    return new Negociacao(new Date(objeto.data), objeto.quantidade, objeto.valor);
+                                }));
+                            }).catch(function (erro) {
+                                console.log(erro);
+                                reject('Não foi possível obter as negociações da semana retrasada');
+                            });
+                        });
+                    }
+                }, {
+                    key: "obterNegociacoes",
+                    value: function obterNegociacoes() {
+                        var _this4 = this;
 
+                        return new Promise(function (resolve, reject) {
 
-    obterNegociacoes() {
+                            Promise.all([_this4.obterNegociacoesDaSemana(), _this4.obterNegociacoesDaSemanaAnterior(), _this4.obterNegociacoesDaSemanaRetrasada()]).then(function (periodos) {
 
-        return new Promise((resolve, reject) => {
+                                var negociacoes = periodos.reduce(function (dados, periodo) {
+                                    return dados.concat(periodo);
+                                }, []).map(function (dado) {
+                                    return new Negociacao(new Date(dado.data), dado.quantidade, dado.valor);
+                                });
 
-            Promise.all([
-                this.obterNegociacoesDaSemana(),
-                this.obterNegociacoesDaSemanaAnterior(),
-                this.obterNegociacoesDaSemanaRetrasada()
-            ]).then(periodos => {
+                                resolve(negociacoes);
+                            }).catch(function (erro) {
+                                return reject(erro);
+                            });
+                        });
+                    }
+                }, {
+                    key: "cadastra",
+                    value: function cadastra(negociacao) {
 
-                let negociacoes = periodos
-                    .reduce((dados, periodo) => dados.concat(periodo), [])
-                    .map(dado => new Negociacao(new Date(dado.data), dado.quantidade, dado.valor ));
+                        return ConnectionFactory.getConnection().then(function (connection) {
+                            return new NegociacaoDao(connection);
+                        }).then(function (dao) {
+                            return dao.adiciona(negociacao);
+                        }).then(function () {
+                            return 'Negociacao adicionada com sucesso';
+                        }).catch(function (erro) {
+                            console.log(erro);
+                            throw new Error('Não foi possíve adicionar a negociação');
+                        });
+                    }
+                }, {
+                    key: "lista",
+                    value: function lista() {
+                        return ConnectionFactory.getConnection().then(function (connection) {
+                            return new NegociacaoDao(connection);
+                        }).then(function (dao) {
+                            return dao.listaTodos();
+                        }).catch(function (erro) {
+                            console.log(erro);
+                            throw new Error('Não foi possível obter as negociações');
+                        });
+                    }
+                }, {
+                    key: "apaga",
+                    value: function apaga() {
+                        return ConnectionFactory.getConnection().then(function (connection) {
+                            return new NegociacaoDao(connection);
+                        }).then(function (dao) {
+                            return dao.listaTodos();
+                        }).catch(function (erro) {
+                            console.log(erro);
+                            throw new Error('Não foi possível apagar as negociações');
+                        });
+                    }
+                }, {
+                    key: "importa",
+                    value: function importa(listaAtual) {
 
-                resolve(negociacoes);
+                        return this.obterNegociacoes().then(function (negociacoes) {
+                            return negociacoes.filter(function (negociacao) {
+                                return !listaAtual.some(function (negociacaoExistente) {
+                                    return JSON.stringify(negociacao) == JSON.stringify(negociacaoExistente);
+                                });
+                            });
+                        }).catch(function (erro) {
+                            console.log(erro);
+                            throw new Error("Não foi possível buscar negociações para importar");
+                        });
+                    }
+                }]);
 
-            }).catch(erro => reject(erro));
-        });
-    }
+                return NegociacaoService;
+            }());
 
-    cadastra(negociacao){
-
-        return ConnectionFactory
-            .getConnection()
-            .then(connection => new NegociacaoDao(connection))
-            .then(dao => dao.adiciona(negociacao))
-            .then(() => 'Negociacao adicionada com sucesso')
-            .catch((erro) => {
-                console.log(erro);
-                throw new Error('Não foi possíve adicionar a negociação');
-            });
-
-    }
-
-    lista(){
-        return ConnectionFactory
-            .getConnection()
-            .then(connection => new NegociacaoDao(connection))
-            .then(dao => dao.listaTodos())
-            .catch(erro => {
-                console.log(erro);
-                throw new Error('Não foi possível obter as negociações');
-            });
-    }
-
-    apaga() {
-        return ConnectionFactory
-            .getConnection()
-            .then(connection => new NegociacaoDao(connection))
-            .then(dao => dao.listaTodos())
-            .catch(erro => {
-                console.log(erro);
-                throw new Error('Não foi possível apagar as negociações')
-            });
-    }
-
-    importa(listaAtual) {
-
-        return this.obterNegociacoes()
-            .then(negociacoes =>
-                negociacoes.filter(negociacao =>
-                    !listaAtual.some(negociacaoExistente =>
-                        JSON.stringify(negociacao) == JSON.stringify(negociacaoExistente)))
-            )
-            .catch(erro => {
-                console.log(erro);
-                throw new Error("Não foi possível buscar negociações para importar");
-            })
-
-    }
-
-
-}
+            _export("NegociacaoService", NegociacaoService);
+        }
+    };
+});

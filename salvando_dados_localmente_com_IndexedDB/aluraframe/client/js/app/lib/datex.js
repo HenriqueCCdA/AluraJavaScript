@@ -1,9 +1,9 @@
-'use strict';
+"use strict";
 
 System.register([], function (_export, _context) {
     "use strict";
 
-    var _createClass, View;
+    var _createClass, DateHelper;
 
     function _classCallCheck(instance, Constructor) {
         if (!(instance instanceof Constructor)) {
@@ -32,30 +32,25 @@ System.register([], function (_export, _context) {
                 };
             }();
 
-            _export('View', View = function () {
-                function View(elemento) {
-                    _classCallCheck(this, View);
-
-                    this._elemento = elemento;
+            DateHelper = function () {
+                function DateHelper() {
+                    _classCallCheck(this, DateHelper);
                 }
 
-                _createClass(View, [{
-                    key: 'template',
-                    value: function template() {
-
-                        throw new Error('O método template deve ser implementado');
+                _createClass(DateHelper, [{
+                    key: "dateToString",
+                    value: function dateToString(date) {
+                        /* */
                     }
                 }, {
-                    key: 'update',
-                    value: function update(model) {
-                        this._elemento.innerHTML = this.template(model);
+                    key: "srtingToDate",
+                    value: function srtingToDate(string) {
+                        /* */
                     }
                 }]);
 
-                return View;
-            }());
-
-            _export('View', View);
+                return DateHelper;
+            }();
         }
     };
 });
