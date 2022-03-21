@@ -11,4 +11,4 @@
 9. [Curso de JavaScript: Conhecendo o Browser e padrões de projeto](https://github.com/HenriqueCCdA/AluraJavaScript/tree/main/padroes_de_projeto) iniciado dia 05/02/2022 e finalizado dia 10/02/2022
 10.[Curso de JavaScript: Aprofundando em MVC, padrão Proxy e Factory](https://github.com/HenriqueCCdA/AluraJavaScript/tree/main/) iniciado dia 10/02/2022 e finalizado dia 17/02/2022
 11.[Curso de JavaScript: salvando dados localmente com IndexedDB](https://github.com/HenriqueCCdA/AluraJavaScript/tree/main/salvando_dados_localmente_com_IndexedDB) iniciado dia 14/03/2022 e finalizado dia 17/03/2022
-12.[Curso de JavaScript: de padrões a uma abordagem funcional](https://github.com/HenriqueCCdA/AluraJavaScript/tree/main/padroes_de_projeto_funcional) iniciado dia 18/03/2022 e finalizado dia -/-/2022
+12.[Curso de JavaScript: de padrões a uma abordagem funcional](https://github.com/HenriqueCCdA/AluraJavaScript/tree/main/padroes_de_projeto_funcional) iniciado dia 18/03/2022 e finalizado dia 21/03/2022
